@@ -1,0 +1,9 @@
+dev/.env
+dev/custom_entrypoint.sh
+dev/Dockerfile
+dev/kanbo.dev.db-pvc.yaml
+dev/kanbo.dev.deployment.yaml
+dev/kanbo.dev.fv-pvc.yaml
+dev/kanbo.dev.ingress.yaml
+dev/kanbo.dev.svc.yaml
+dev/kustomization.yaml

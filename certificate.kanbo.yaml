@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: kanbo-tls
+  namespace: kanbo
+spec:
+  secretName: kanbo-tls
+  issuerRef:
+    name: kanbo-letsencrypt
+  duration: 2160h
+  renewBefore: 360h    
+  dnsNames:
+  - kanbo.diagon.cloud

@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  labels:
+    app.kubernetes.io/name: kanbo
+    app.kubernetes.io/instance: kanbo
+  annotations:
+    cert-manager.io/issuer: gatus-letsencrypt    
+  name: ingress
+  namespace: kanbo
+spec:
+  ingressClassName: nginx 
+  tls:
+  - hosts:
+    - kanbo.diagon.cloud
+    secretName: kanbo-tls
+  rules:
+  - host: kanbo.diagon.cloud
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: kanbo-service
+            port: 
+              number: 443 #3456
+
+

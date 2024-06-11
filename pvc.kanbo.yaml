@@ -1,0 +1,24 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: db-pvc
+spec:
+  storageClassName: storage
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 2Gi      
+
+--- 
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: fv-pvc
+spec:
+  storageClassName: storage
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 2Gi

@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vikunja
+spec:
+  selector:
+    matchLabels:
+      app: vikunja-kanbo
+  template:
+    spec:
+      annotations:
+        avp.kubernetes.io/path: "argocd/data/argocd-vault-plugin/vikunja"    
+        vault.hashicorp.com/agent-inject: "true"
+        vault.hashicorp.com/role: "vikunja"
+        vault.hashicorp.com/agent-inject-secret-db-creds: "database/creds/vikunja"
+        vault.hashicorp.com/agent-inject-template-db-config: |
+          {{- with secret "database/creds/vikunja" -}}
+          export VIKUNJA_DATABASE_USER="{{ .Data.username }}"
+          export VIKUNJA_DATABASE_PASSWORD="{{ .Data.password }}"
+          {{- end }}
+      containers:
+      - name: kanbo
+        image: vikunja/vikunja
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 3456
+        env: 
+          - name: VIKUNJA_SERVICE_PUBLICURL
+            value: <VIKUNJA_SERVICE_PUBLICURL>
+          - name: VIKUNJA_SERVICE_TIMEZONE
+            value: <VIKUNJA_SERVICE_TIMEZONE>
+          - name: VIKUNJA_DATABASE_TYPE
+            value: <VIKUNJA_DATABASE_TYPE>
+          - name: VIKUNJA_DATABASE_HOST
+            value: <VIKUNJA_DATABASE_HOST>
+          - name: VIKUNJA_MAILER_ENABLED
+            value: <VIKUNJA_MAILER_ENABLED>
+          - name: VIKUNJA_MAILER_HOST
+            value: <VIKUNJA_MAILER_HOST>
+          - name: VIKUNJA_MAILER_USERNAME
+            value: <VIKUNJA_MAILER_USERNAME>
+          - name: VIKUNJA_MAILER_FROMEMAIL
+            value: <VIKUNJA_MAILER_FROMEMAIL
+          - name: VIKUNJA_LOG_PATH
+            value: <VIKUNJA_LOG_PATH>
+          - name: VIKUNJA_LOG_DATABASE
+            value: <VIKUNJA_LOG_DATABASE>
+          - name: VIKUNJA_METRICS_ENABLED
+            value: <VIKUNJA_METRICS_ENABLED>
+          - name: VIKUNJA_LOG_DATABASELEVEL
+            value: <VIKUNJA_LOG_DATABASELEVEL>
+          - name: VIKUNJA_DATABASE_DATABASE
+            value: <VIKUNJA_DATABASE_DATABASE>
+          - name: VIKUNJA_SERVICE_JWTSECRET
+            value: <VIKUNJA_SERVICE_JWTSECRET>
+        volumeMounts:
+          - mountPath: /app/vikunja/files
+            name: files-volume        
+          - mountPath: /app/vikunja/database
+            name: database-volume
+          - name: configmap-volume
+            mountPath: ~/.config/vikunja/
+            subPath: config.yaml
+      volumes:
+        - name: files-volume
+          persistentVolumeClaim:
+            claimName: fv-pvc
+        - name: database-volume
+          persistentVolumeClaim:
+            claimName: db-pvc
+        - name: configmap-volume
+          configMap:
+            name: kanbo-cm

@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: vikunja-cm
+data:
+  configFile: |
+    auth:
+      openid:
+        enabled: true
+        redirecturl: "<path:argpcd/data/argocd-vault-plugin#redirecturl>"
+        providers:
+          - name: <path:argpcd/data/argocd-vault-plugin#provider>
+            authurl: "<path:argpcd/data/argocd-vault-plugin#authurl>"
+            logouturl: "<path:argpcd/data/argocd-vault-plugin#logouturl>"
+            clientid: "<path:argpcd/data/argocd-vault-plugin#clientid>"
+            clientsecret: "<path:argpcd/data/argocd-vault-plugin#clientsecret>"
