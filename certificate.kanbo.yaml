@@ -10,4 +10,4 @@ spec:
   duration: 2160h
   renewBefore: 360h    
   dnsNames:
-  - kanbo.diagon.cloud
+  - <path:argocd/data/argocd-vault-plugin/vikunja#url>

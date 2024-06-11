@@ -5,17 +5,17 @@ metadata:
     app.kubernetes.io/name: kanbo
     app.kubernetes.io/instance: kanbo
   annotations:
-    cert-manager.io/issuer: gatus-letsencrypt    
+    cert-manager.io/issuer: kanbo-letsencrypt    
   name: ingress
   namespace: kanbo
 spec:
   ingressClassName: nginx 
   tls:
   - hosts:
-    - kanbo.diagon.cloud
+    - <path:argocd/data/argocd-vault-plugin/vikunja#url>
     secretName: kanbo-tls
   rules:
-  - host: kanbo.diagon.cloud
+  - host: <path:argocd/data/argocd-vault-plugin/vikunja#url>
     http:
       paths:
       - pathType: Prefix

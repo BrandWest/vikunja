@@ -17,7 +17,7 @@ spec:
     # An empty 'selector' means that this solver matches all domains
     - selector:
         dnsNames:
-        - kanbo.diagon.cloud
+        - <path:argocd/data/argocd-vault-plugin/vikunja#url>
       dns01:
         cloudflare:
           email: <path:argocd/data/argocd-vault-plugin/cloudflare#email>

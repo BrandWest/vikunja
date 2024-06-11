@@ -11,4 +11,4 @@ spec:
     targetPort: 3456
   type: LoadBalancer
   selector:
-    app: kanbo-dev
+    app: kanbo
