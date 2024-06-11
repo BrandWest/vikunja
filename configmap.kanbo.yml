@@ -7,10 +7,10 @@ data:
     auth:
       openid:
         enabled: true
-        redirecturl: "<path:argocd/data/argocd-vault-plugin#redirecturl>"
+        redirecturl: <path:argocd/data/argocd-vault-plugin#redirecturl>
         providers:
           - name: <path:argocd/data/argocd-vault-plugin#provider>
-            authurl: "<path:argocd/data/argocd-vault-plugin#authurl>"
-            logouturl: "<path:argocd/data/argocd-vault-plugin#logouturl>"
-            clientid: "<path:argocd/data/argocd-vault-plugin#clientid>"
-            clientsecret: "<path:argocd/data/argocd-vault-plugin#clientsecret>"
+            authurl: <path:argocd/data/argocd-vault-plugin#authurl>
+            logouturl: <path:argocd/data/argocd-vault-plugin#logouturl>
+            clientid: <path:argocd/data/argocd-vault-plugin#clientid>
+            clientsecret: <path:argocd/data/argocd-vault-plugin#clientsecret>
