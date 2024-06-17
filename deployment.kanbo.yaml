@@ -13,6 +13,7 @@ spec:
         vault.hashicorp.com/agent-inject: "true"
         vault.hashicorp.com/role: "vikunja"
         vault.hashicorp.com/agent-inject-secret-db-creds: "database/creds/vikunja"
+        vault.hashicorp.com/tls-skip-verify: "true" #Temp
         vault.hashicorp.com/agent-inject-template-db-config: |
           {{- with secret "database/creds/vikunja" -}}
           export VIKUNJA_DATABASE_USER="{{ .Data.username }}"
