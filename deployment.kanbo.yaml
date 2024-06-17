@@ -5,9 +5,9 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: vikunja-kanbo
+      app: kanbo
   template:
-    spec:
+    metadata:
       annotations:
         avp.kubernetes.io/path: "argocd/data/argocd-vault-plugin/vikunja"    
         vault.hashicorp.com/agent-inject: "true"
@@ -18,6 +18,9 @@ spec:
           export VIKUNJA_DATABASE_USER="{{ .Data.username }}"
           export VIKUNJA_DATABASE_PASSWORD="{{ .Data.password }}"
           {{- end }}
+      labels:
+        app: kanbo
+    spec:
       containers:
       - name: kanbo
         image: vikunja/vikunja
@@ -73,4 +76,4 @@ spec:
             claimName: db-pvc
         - name: configmap-volume
           configMap:
-            name: kanbo-cm
+            name: vikunja-cm
