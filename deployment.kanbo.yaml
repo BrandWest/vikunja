@@ -11,7 +11,7 @@ spec:
       annotations:
         avp.kubernetes.io/path: "argocd/data/argocd-vault-plugin/vikunja"    
         vault.hashicorp.com/agent-inject: "true"
-        vault.hashicorp.com/role: "vikunja"
+        vault.hashicorp.com/role: "vikunja-sa"
         vault.hashicorp.com/agent-inject-secret-db-creds: "database/creds/vikunja"
         # vault.hashicorp.com/tls-skip-verify: "true" #Temp
         vault.hashicorp.com/service: "https://vault.diagon.cloud"
